@@ -12,6 +12,8 @@ from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.client.default import DefaultBotProperties
+from aiogram.enums import ParseMode
 
 BOT_TOKEN = os.getenv("BOT_TOKEN", "9189996603:AAHyEGvaSPoewN1nZWsFkINanoWN5qnH_tc")
 
@@ -132,7 +134,7 @@ class S(StatesGroup):
     must_join = State()
     waiting = State()
 
-bot = Bot(BOT_TOKEN, parse_mode="HTML")
+bot = Bot(BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 dp = Dispatcher(storage=MemoryStorage())
 
 # ============================================================
