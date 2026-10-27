@@ -175,8 +175,14 @@ def detect(cc):
 def parse_line(line):
     line = line.strip()
     if not line: return None
+    
+    # "Visa False : 5726892142530220|09|2025|070" formatını ayıklar
+    if ":" in line:
+        line = line.split(":", 1)[1].strip()
+        
     m = CARD_RE.match(line)
     if m: return m.group(1), m.group(2), m.group(3), m.group(4)
+    
     parts = line.split("|")
     if len(parts) == 3 and "/" in parts[1]:
         cc, exp, cvv = parts
@@ -359,7 +365,7 @@ async def do_check_text(m: Message, state: FSMContext):
     await m.answer(body, reply_markup=kb)
 
 # ============================================================
-# DOSYA İLE KART KONTROLÜ (YENİ)
+# DOSYA İLE KART KONTROLÜ
 # ============================================================
 @dp.message(S.waiting, F.document)
 async def do_check_file(m: Message, state: FSMContext):
