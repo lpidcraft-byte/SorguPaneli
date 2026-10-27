@@ -29,7 +29,7 @@ REQUIRED_CHAT_LINK = "https://t.me/vantoriumchat"
 REQUIRED_CHAT_NAME = "Vantorium Team #krallik Sohbet"
 
 # ============================================================
-# PREMIUM EMOJI IDs (Güvenli / Çalışan Set)
+# PREMIUM EMOJI IDs (Mesaj İçi)
 # ============================================================
 E = {
     "fire":    '<tg-emoji emoji-id="5368626391454189165">🔥</tg-emoji>',
@@ -61,6 +61,7 @@ E = {
     "shield":  '<tg-emoji emoji-id="5368394704376369828">🛡</tg-emoji>',
 }
 
+# Bayraklar (Senin verdiğin gerçek premium emojiler)
 FLAG = {
     "tr": '<tg-emoji emoji-id="5224601903383457698">🇹🇷</tg-emoji>',
     "en": '<tg-emoji emoji-id="4972050301595944918">🇬🇧</tg-emoji>',
@@ -211,30 +212,30 @@ async def is_member(user_id):
     return True
 
 # ============================================================
-# KLAVYELER
+# KLAVYELER (Hata vermemesi için butonlarda standart emoji)
 # ============================================================
 def kb_lang():
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="Türkçe", callback_data="lang_tr", icon_custom_emoji_id="5224601903383457698")],
-        [InlineKeyboardButton(text="English", callback_data="lang_en", icon_custom_emoji_id="4972050301595944918")],
-        [InlineKeyboardButton(text="Kurdî", callback_data="lang_ku", icon_custom_emoji_id="5877237946540627622")],
+        [InlineKeyboardButton(text="Türkçe 🇹🇷", callback_data="lang_tr")],
+        [InlineKeyboardButton(text="English 🇬🇧", callback_data="lang_en")],
+        [InlineKeyboardButton(text="Kurdî ☀️", callback_data="lang_ku")],
     ])
 
 def kb_must_join(lang):
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=f"{T(lang,'btn_channel')} — {REQUIRED_CHANNEL_NAME}", url=REQUIRED_CHANNEL_LINK, icon_custom_emoji_id="5368560257278211940")],
-        [InlineKeyboardButton(text=f"{T(lang,'btn_chat')} — {REQUIRED_CHAT_NAME}", url=REQUIRED_CHAT_LINK, icon_custom_emoji_id="5368510920189549339")],
-        [InlineKeyboardButton(text=T(lang, "btn_verify"), callback_data="verify_join", icon_custom_emoji_id="5368613902438212880")],
+        [InlineKeyboardButton(text=f"📡 {T(lang,'btn_channel')}", url=REQUIRED_CHANNEL_LINK)],
+        [InlineKeyboardButton(text=f"👋 {T(lang,'btn_chat')}", url=REQUIRED_CHAT_LINK)],
+        [InlineKeyboardButton(text=f"🔄 {T(lang, 'btn_verify')}", callback_data="verify_join")],
     ])
 
 def kb_main(lang):
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=T(lang, "btn_check"), callback_data="menu_check", icon_custom_emoji_id="5368551272114826295")],
-        [InlineKeyboardButton(text=T(lang, "btn_results"), callback_data="menu_results", icon_custom_emoji_id="5368502936662946169"),
-         InlineKeyboardButton(text=T(lang, "btn_info"), callback_data="menu_info", icon_custom_emoji_id="5368469506185093842")],
-        [InlineKeyboardButton(text=T(lang, "btn_settings"), callback_data="menu_settings", icon_custom_emoji_id="5368443384020025305"),
-         InlineKeyboardButton(text=T(lang, "btn_premium"), callback_data="menu_premium", icon_custom_emoji_id="5368433507511530513")],
-        [InlineKeyboardButton(text=T(lang, "btn_lang"), callback_data="menu_lang", icon_custom_emoji_id="5368656884769273488")],
+        [InlineKeyboardButton(text=f"💳 {T(lang, 'btn_check')}", callback_data="menu_check")],
+        [InlineKeyboardButton(text=f"📦 {T(lang, 'btn_results')}", callback_data="menu_results"),
+         InlineKeyboardButton(text=f"🔍 {T(lang, 'btn_info')}", callback_data="menu_info")],
+        [InlineKeyboardButton(text=f"⚙️ {T(lang, 'btn_settings')}", callback_data="menu_settings"),
+         InlineKeyboardButton(text=f"👑 {T(lang, 'btn_premium')}", callback_data="menu_premium")],
+        [InlineKeyboardButton(text=f"🌍 {T(lang, 'btn_lang')}", callback_data="menu_lang")],
     ])
 
 # ============================================================
@@ -349,8 +350,8 @@ async def do_check(m: Message, state: FSMContext):
         body += f"{e} <code>{raw}</code>\n   {em('arrow')} <i>{tag}</i> — <i>{extra}</i>\n"
     body += f"\n{em('trophy')} <b><i>" + T(lang, "results_summary", live=live, dead=dead, err=err) + "</i></b>"
     kb = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=T(lang, "btn_again"), callback_data="menu_check", icon_custom_emoji_id="5368613902438212880"),
-         InlineKeyboardButton(text=T(lang, "btn_home"), callback_data="menu_home", icon_custom_emoji_id="5368363377368111017")]])
+        [InlineKeyboardButton(text=f"🔄 {T(lang, 'btn_again')}", callback_data="menu_check"),
+         InlineKeyboardButton(text=f"🏠 {T(lang, 'btn_home')}", callback_data="menu_home")]])
     await m.answer(body, reply_markup=kb)
 
 @dp.callback_query(F.data == "menu_home")
