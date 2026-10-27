@@ -29,7 +29,7 @@ REQUIRED_CHAT_LINK = "https://t.me/vantoriumchat"
 REQUIRED_CHAT_NAME = "Vantorium Team #krallik Sohbet"
 
 # ============================================================
-# PREMIUM EMOJI IDs (Gerçek ve Farklı)
+# PREMIUM EMOJI IDs (Güvenli / Çalışan Set)
 # ============================================================
 E = {
     "fire":    '<tg-emoji emoji-id="5368626391454189165">🔥</tg-emoji>',
