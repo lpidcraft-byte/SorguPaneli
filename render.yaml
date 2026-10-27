@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: cc-checker-bot
+    name: sorgupaneli
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
