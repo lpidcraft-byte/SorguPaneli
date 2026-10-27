@@ -1,12 +1,14 @@
 import asyncio
 import os
 import re
+import io
 import threading
 import aiohttp
 from flask import Flask
 from aiogram import Bot, Dispatcher, F
 from aiogram.types import (
     Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton,
+    BufferedInputFile,
 )
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
@@ -29,7 +31,7 @@ REQUIRED_CHAT_LINK = "https://t.me/vantoriumchat"
 REQUIRED_CHAT_NAME = "Vantorium Team #krallik Sohbet"
 
 # ============================================================
-# GERÇEK PREMIUM EMOJI ID'LERİ (Doğrulanmış)
+# GERÇEK PREMIUM EMOJI ID'LERİ
 # ============================================================
 E = {
     "fire":    '<tg-emoji emoji-id="5424972470023104089">🔥</tg-emoji>',
@@ -79,7 +81,7 @@ LANGS = {
         "menu_hint": "Aşağıdan devam et", "btn_check": "CC Check", "btn_results": "Sonuçlar",
         "btn_info": "Bilgi", "btn_settings": "Ayarlar", "btn_premium": "Premium", "btn_lang": "Dil",
         "check_title": "CC Check Menüsü", "formats": "Formatlar",
-        "each_line": "Her satır bir kart. Toplu at.", "result_types": "Sonuç", "ready": "Hazır!",
+        "each_line": "Her satır bir kart. Toplu at veya .txt dosyası gönder.", "result_types": "Sonuç", "ready": "Hazır!",
         "info_title": "Bilgi", "info_lines": "Luhn doğrulama\nBIN ülke tespiti\nGateway live check\nTarih validasyonu",
         "special": "Nono için özel.", "results_title": "Sonuçlar", "no_records": "Henüz kayıt yok.",
         "soon": "Yakında!", "premium_active": "Premium aktif!", "empty_msg": "Boş mesaj.",
@@ -97,7 +99,7 @@ LANGS = {
         "menu_hint": "Continue below", "btn_check": "CC Check", "btn_results": "Results",
         "btn_info": "Info", "btn_settings": "Settings", "btn_premium": "Premium", "btn_lang": "Language",
         "check_title": "CC Check Menu", "formats": "Formats",
-        "each_line": "One card per line. Send bulk.", "result_types": "Result", "ready": "Ready!",
+        "each_line": "One card per line. Send bulk or .txt file.", "result_types": "Result", "ready": "Ready!",
         "info_title": "Info", "info_lines": "Luhn validation\nBIN country detection\nGateway live check\nExpiry validation",
         "special": "Special for Nono.", "results_title": "Results", "no_records": "No records yet.",
         "soon": "Soon!", "premium_active": "Premium active!", "empty_msg": "Empty message.",
@@ -115,7 +117,7 @@ LANGS = {
         "menu_hint": "Ji jêr berdewam bike", "btn_check": "CC Check", "btn_results": "Encam",
         "btn_info": "Agahî", "btn_settings": "Sazkarî", "btn_premium": "Premium", "btn_lang": "Ziman",
         "check_title": "Menuya CC Check", "formats": "Format",
-        "each_line": "Her rêzek kartek. Bi komî bişîne.", "result_types": "Encam", "ready": "Amade!",
+        "each_line": "Her rêzek kartek. Bi komî an .txt bişîne.", "result_types": "Encam", "ready": "Amade!",
         "info_title": "Agahî", "info_lines": "Verastkirina Luhn\nTesbîtkirina welat BIN\nKontrola gateway live\nVerastkirina tarîxê",
         "special": "Ji bo Nono taybet.", "results_title": "Encam", "no_records": "Hîn tomar tune.",
         "soon": "Zû tê!", "premium_active": "Premium çalak!", "empty_msg": "Peyama vala.",
@@ -323,8 +325,11 @@ async def menu_premium(c: CallbackQuery, state: FSMContext):
     data = await state.get_data(); lang = data.get("lang", "tr")
     await c.answer(f"{em('crown')} {T(lang, 'premium_active')}", show_alert=True)
 
-@dp.message(S.waiting)
-async def do_check(m: Message, state: FSMContext):
+# ============================================================
+# YAZI İLE KART KONTROLÜ
+# ============================================================
+@dp.message(S.waiting, F.text)
+async def do_check_text(m: Message, state: FSMContext):
     data = await state.get_data(); lang = data.get("lang", "tr")
     lines = [l for l in m.text.splitlines() if l.strip()]
     if not lines:
@@ -352,6 +357,81 @@ async def do_check(m: Message, state: FSMContext):
         [InlineKeyboardButton(text=T(lang, "btn_again"), callback_data="menu_check", icon_custom_emoji_id="5256144585586932056"),
          InlineKeyboardButton(text=T(lang, "btn_home"), callback_data="menu_home", icon_custom_emoji_id="5807868868886009920")]])
     await m.answer(body, reply_markup=kb)
+
+# ============================================================
+# DOSYA İLE KART KONTROLÜ (YENİ)
+# ============================================================
+@dp.message(S.waiting, F.document)
+async def do_check_file(m: Message, state: FSMContext):
+    doc = m.document
+    if not doc.file_name.lower().endswith('.txt'):
+        await m.answer(f"{em('warn')} <b><i>Lütfen .txt uzantılı bir dosya gönder.</i></b>")
+        return
+
+    data = await state.get_data(); lang = data.get("lang", "tr")
+    msg = await m.answer(f"{em('refresh')} <i>Dosya indiriliyor ve kontrol ediliyor, lütfen bekle...</i>")
+
+    file_in_memory = io.BytesIO()
+    try:
+        await bot.download(doc, destination=file_in_memory)
+        file_in_memory.seek(0)
+        content = file_in_memory.read().decode('utf-8', errors='ignore')
+    except Exception as e:
+        await msg.edit_text(f"{em('cross')} <b><i>Dosya okunamadı.</i></b>")
+        return
+
+    lines = [l.strip() for l in content.splitlines() if l.strip()]
+    cards = []
+    for line in lines:
+        parsed = parse_line(line)
+        if parsed:
+            cards.append(parsed)
+
+    if not cards:
+        await msg.edit_text(f"{em('cross')} <b><i>Dosyada geçerli kart formatı bulunamadı.</i></b>")
+        return
+
+    await msg.edit_text(f"{em('search')} <i>{len(cards)} kart bulundu. Eşzamanlı kontrol ediliyor (Limit: 15)...</i>")
+
+    live_cards = []
+    dead_count = 0
+    err_count = 0
+
+    async with aiohttp.ClientSession() as session:
+        sem = asyncio.Semaphore(15)
+        async def check_with_sem(card):
+            async with sem:
+                return card, await check_one(session, *card)
+
+        tasks = [check_with_sem(c) for c in cards]
+        results = await asyncio.gather(*tasks)
+
+        for card, res in results:
+            cc, mm, yy, cvv = card
+            if res["status"] == "LIVE":
+                live_cards.append(f"{cc}|{mm}|{yy}|{cvv}")
+            elif res["status"] == "DEAD":
+                dead_count += 1
+            else:
+                err_count += 1
+
+    if not live_cards:
+        await msg.edit_text(f"{em('skull')} <b><i>Kontrol bitti. Maalesef LIVE kart yok.</i></b>\n\n{em('cross')} DEAD: {dead_count} | {em('warn')} ERR: {err_count}")
+        return
+
+    out_content = "\n".join(live_cards)
+    out_file = BufferedInputFile(out_content.encode('utf-8'), filename="live_cards.txt")
+
+    await msg.edit_text(
+        f"{em('check')} <b><i>Kontrol Bitti!</i></b>\n\n"
+        f"{em('trophy')} LIVE: <b>{len(live_cards)}</b> | {em('skull')} DEAD: {dead_count} | {em('warn')} ERR: {err_count}"
+    )
+    
+    await m.answer_document(
+        document=out_file,
+        caption=f"{em('check')} <b><i>İşte Çalışan (LIVE) Kartlar ({len(live_cards)} adet)</i></b>",
+        reply_markup=kb_main(lang)
+    )
 
 @dp.callback_query(F.data == "menu_home")
 async def menu_home(c: CallbackQuery, state: FSMContext):
