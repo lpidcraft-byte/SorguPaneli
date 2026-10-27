@@ -1,4 +1,3 @@
-cc_checker_bot.py
 # pip install aiogram aiohttp
 # python cc_checker_bot.py
 
