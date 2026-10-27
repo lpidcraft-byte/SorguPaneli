@@ -29,39 +29,38 @@ REQUIRED_CHAT_LINK = "https://t.me/vantoriumchat"
 REQUIRED_CHAT_NAME = "Vantorium Team #krallik Sohbet"
 
 # ============================================================
-# PREMIUM EMOJI IDs (Mesaj İçi)
+# GERÇEK PREMIUM EMOJI ID'LERİ (Doğrulanmış)
 # ============================================================
 E = {
-    "fire":    '<tg-emoji emoji-id="5368626391454189165">🔥</tg-emoji>',
-    "check":   '<tg-emoji emoji-id="5368324170671202286">✅</tg-emoji>',
-    "cross":   '<tg-emoji emoji-id="5368576037344951577">❌</tg-emoji>',
-    "card":    '<tg-emoji emoji-id="5368551272114826295">💳</tg-emoji>',
-    "crown":   '<tg-emoji emoji-id="5368433507511530513">👑</tg-emoji>',
-    "diamond": '<tg-emoji emoji-id="5368393856065265668">💎</tg-emoji>',
-    "bolt":    '<tg-emoji emoji-id="5368408446203996712">⚡</tg-emoji>',
-    "globe":   '<tg-emoji emoji-id="5368656884769273488">🌍</tg-emoji>',
-    "star":    '<tg-emoji emoji-id="5368456139075502208">⭐</tg-emoji>',
-    "sparkle": '<tg-emoji emoji-id="5368586302963982840">✨</tg-emoji>',
-    "warn":    '<tg-emoji emoji-id="5368557442530958166">⚠️</tg-emoji>',
-    "arrow":   '<tg-emoji emoji-id="5368324170671202286">➡️</tg-emoji>',
-    "skull":   '<tg-emoji emoji-id="5368541402338664686">💀</tg-emoji>',
-    "trophy":  '<tg-emoji emoji-id="5368630415084672861">🏆</tg-emoji>',
-    "target":  '<tg-emoji emoji-id="5368484562983199436">🎯</tg-emoji>',
-    "lock":    '<tg-emoji emoji-id="5368456898336224947">🔒</tg-emoji>',
-    "heart":   '<tg-emoji emoji-id="5368514672954413327">❤️</tg-emoji>',
-    "refresh": '<tg-emoji emoji-id="5368613902438212880">🔄</tg-emoji>',
-    "gear":    '<tg-emoji emoji-id="5368443384020025305">⚙️</tg-emoji>',
-    "box":     '<tg-emoji emoji-id="5368502936662946169">📦</tg-emoji>',
-    "home":    '<tg-emoji emoji-id="5368363377368111017">🏠</tg-emoji>',
-    "money":   '<tg-emoji emoji-id="5368316314108845646">💰</tg-emoji>',
-    "ping":    '<tg-emoji emoji-id="5368560257278211940">📡</tg-emoji>',
-    "search":  '<tg-emoji emoji-id="5368469506185093842">🔍</tg-emoji>',
-    "wave":    '<tg-emoji emoji-id="5368510920189549339">👋</tg-emoji>',
-    "rocket":  '<tg-emoji emoji-id="5368583061344809863">🚀</tg-emoji>',
-    "shield":  '<tg-emoji emoji-id="5368394704376369828">🛡</tg-emoji>',
+    "fire":    '<tg-emoji emoji-id="5424972470023104089">🔥</tg-emoji>',
+    "check":   '<tg-emoji emoji-id="5206607081334906820">✅</tg-emoji>',
+    "cross":   '<tg-emoji emoji-id="5210952531676504517">❌</tg-emoji>',
+    "card":    '<tg-emoji emoji-id="5258477770735885832">💳</tg-emoji>',
+    "crown":   '<tg-emoji emoji-id="5807868868886009920">👑</tg-emoji>',
+    "diamond": '<tg-emoji emoji-id="5807465992363710697">💎</tg-emoji>',
+    "bolt":    '<tg-emoji emoji-id="5843553939672274145">⚡</tg-emoji>',
+    "globe":   '<tg-emoji emoji-id="5283154114493059275">🌍</tg-emoji>',
+    "star":    '<tg-emoji emoji-id="5874948844935974490">⭐</tg-emoji>',
+    "sparkle": '<tg-emoji emoji-id="5874948844935974490">✨</tg-emoji>',
+    "warn":    '<tg-emoji emoji-id="5255949705740843980">⚠️</tg-emoji>',
+    "arrow":   '<tg-emoji emoji-id="5256039517801975973">➡️</tg-emoji>',
+    "skull":   '<tg-emoji emoji-id="5890794491119407059">💀</tg-emoji>',
+    "trophy":  '<tg-emoji emoji-id="5874948844935974490">🏆</tg-emoji>',
+    "target":  '<tg-emoji emoji-id="5283154114493059275">🎯</tg-emoji>',
+    "lock":    '<tg-emoji emoji-id="5256109525768899041">🔒</tg-emoji>',
+    "heart":   '<tg-emoji emoji-id="5255839080268207557">❤️</tg-emoji>',
+    "refresh": '<tg-emoji emoji-id="5256144585586932056">🔄</tg-emoji>',
+    "gear":    '<tg-emoji emoji-id="5283080550293211714">⚙️</tg-emoji>',
+    "box":     '<tg-emoji emoji-id="5258477770735885832">📦</tg-emoji>',
+    "home":    '<tg-emoji emoji-id="5807868868886009920">🏠</tg-emoji>',
+    "money":   '<tg-emoji emoji-id="5258094861516570110">💰</tg-emoji>',
+    "ping":    '<tg-emoji emoji-id="5256212342991001393">📡</tg-emoji>',
+    "search":  '<tg-emoji emoji-id="5255867057685170743">🔍</tg-emoji>',
+    "wave":    '<tg-emoji emoji-id="5278495960467542612">👋</tg-emoji>',
+    "rocket":  '<tg-emoji emoji-id="5282853415242732392">🚀</tg-emoji>',
+    "shield":  '<tg-emoji emoji-id="5256109525768899041">🛡</tg-emoji>',
 }
 
-# Bayraklar (Senin verdiğin gerçek premium emojiler)
 FLAG = {
     "tr": '<tg-emoji emoji-id="5224601903383457698">🇹🇷</tg-emoji>',
     "en": '<tg-emoji emoji-id="4972050301595944918">🇬🇧</tg-emoji>',
@@ -212,30 +211,30 @@ async def is_member(user_id):
     return True
 
 # ============================================================
-# KLAVYELER (Hata vermemesi için butonlarda standart emoji)
+# KLAVYELER
 # ============================================================
 def kb_lang():
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="Türkçe 🇹🇷", callback_data="lang_tr")],
-        [InlineKeyboardButton(text="English 🇬🇧", callback_data="lang_en")],
-        [InlineKeyboardButton(text="Kurdî ☀️", callback_data="lang_ku")],
+        [InlineKeyboardButton(text="Türkçe", callback_data="lang_tr", icon_custom_emoji_id="5224601903383457698")],
+        [InlineKeyboardButton(text="English", callback_data="lang_en", icon_custom_emoji_id="4972050301595944918")],
+        [InlineKeyboardButton(text="Kurdî", callback_data="lang_ku", icon_custom_emoji_id="5877237946540627622")],
     ])
 
 def kb_must_join(lang):
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=f"📡 {T(lang,'btn_channel')}", url=REQUIRED_CHANNEL_LINK)],
-        [InlineKeyboardButton(text=f"👋 {T(lang,'btn_chat')}", url=REQUIRED_CHAT_LINK)],
-        [InlineKeyboardButton(text=f"🔄 {T(lang, 'btn_verify')}", callback_data="verify_join")],
+        [InlineKeyboardButton(text=f"{T(lang,'btn_channel')}", url=REQUIRED_CHANNEL_LINK, icon_custom_emoji_id="5256212342991001393")],
+        [InlineKeyboardButton(text=f"{T(lang,'btn_chat')}", url=REQUIRED_CHAT_LINK, icon_custom_emoji_id="5278495960467542612")],
+        [InlineKeyboardButton(text=f"{T(lang, 'btn_verify')}", callback_data="verify_join", icon_custom_emoji_id="5256144585586932056")],
     ])
 
 def kb_main(lang):
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=f"💳 {T(lang, 'btn_check')}", callback_data="menu_check")],
-        [InlineKeyboardButton(text=f"📦 {T(lang, 'btn_results')}", callback_data="menu_results"),
-         InlineKeyboardButton(text=f"🔍 {T(lang, 'btn_info')}", callback_data="menu_info")],
-        [InlineKeyboardButton(text=f"⚙️ {T(lang, 'btn_settings')}", callback_data="menu_settings"),
-         InlineKeyboardButton(text=f"👑 {T(lang, 'btn_premium')}", callback_data="menu_premium")],
-        [InlineKeyboardButton(text=f"🌍 {T(lang, 'btn_lang')}", callback_data="menu_lang")],
+        [InlineKeyboardButton(text=T(lang, "btn_check"), callback_data="menu_check", icon_custom_emoji_id="5258477770735885832")],
+        [InlineKeyboardButton(text=T(lang, "btn_results"), callback_data="menu_results", icon_custom_emoji_id="5258477770735885832"),
+         InlineKeyboardButton(text=T(lang, "btn_info"), callback_data="menu_info", icon_custom_emoji_id="5255867057685170743")],
+        [InlineKeyboardButton(text=T(lang, "btn_settings"), callback_data="menu_settings", icon_custom_emoji_id="5283080550293211714"),
+         InlineKeyboardButton(text=T(lang, "btn_premium"), callback_data="menu_premium", icon_custom_emoji_id="5807868868886009920")],
+        [InlineKeyboardButton(text=T(lang, "btn_lang"), callback_data="menu_lang", icon_custom_emoji_id="5283154114493059275")],
     ])
 
 # ============================================================
@@ -350,8 +349,8 @@ async def do_check(m: Message, state: FSMContext):
         body += f"{e} <code>{raw}</code>\n   {em('arrow')} <i>{tag}</i> — <i>{extra}</i>\n"
     body += f"\n{em('trophy')} <b><i>" + T(lang, "results_summary", live=live, dead=dead, err=err) + "</i></b>"
     kb = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=f"🔄 {T(lang, 'btn_again')}", callback_data="menu_check"),
-         InlineKeyboardButton(text=f"🏠 {T(lang, 'btn_home')}", callback_data="menu_home")]])
+        [InlineKeyboardButton(text=T(lang, "btn_again"), callback_data="menu_check", icon_custom_emoji_id="5256144585586932056"),
+         InlineKeyboardButton(text=T(lang, "btn_home"), callback_data="menu_home", icon_custom_emoji_id="5807868868886009920")]])
     await m.answer(body, reply_markup=kb)
 
 @dp.callback_query(F.data == "menu_home")
